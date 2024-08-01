@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import { getMovieDetailsData, getRecommendedMoviesData } from '@/api/axios'
-import { Movie, MovieDetails } from '@/definitions'
+import { Movie, MovieDetails } from '@/common/definitions'
 import { formatNumber } from '@/utils/formatNumber'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'

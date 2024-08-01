@@ -1,4 +1,4 @@
-import { Genre } from '@/definitions'
+import { Genre } from '@/common/definitions'
 
 export function getGenreNameById(genres: Genre[], id: number) {
   const genre = genres.find((genre) => genre.id === id)

@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import MovieTile from '@/components/MovieTile.vue'
-import { Movie } from '@/definitions'
+import { Movie } from '@/common/definitions'
 import { defineComponent, onMounted, ref } from 'vue'
 import { getMoviesData } from '@/api/axios'
 
