@@ -13,12 +13,12 @@
         :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
         :alt="movie.original_title"
       />
-      <!-- <p
-        v-if="genres"
+      <div
+        v-if="movieGenres"
         class="text-xs absolute bottom-0 px-2 rounded-tr-lg bg-white opacity-90"
       >
-        {{ genreNames.join(', ') }}
-      </p> -->
+        {{ movieGenres.join(', ') }}
+      </div>
     </div>
     <div class="px-3 py-2">
       <h4 class="font-bold text-lg mb-1">{{ movie.title }}</h4>
@@ -28,7 +28,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { getGenreNameById } from '@/api/axios'
+import { defineComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
@@ -41,12 +42,26 @@ export default defineComponent({
   },
   setup(props) {
     const router = useRouter()
+    const movieGenres = ref<string[]>([])
+
+    const getGenresList = () => {
+      const maxGenresAmount = 3
+      const genreNames = props.movie.genre_ids
+        .map((genreId: number) => getGenreNameById(genreId))
+        .filter((genreName: string | null) => genreName !== null)
+
+      movieGenres.value = genreNames.slice(0, maxGenresAmount)
+    }
 
     const goToDetails = () => {
       router.push({ name: 'MovieDetails', params: { id: props.movie.id } })
     }
 
-    return { goToDetails }
+    onMounted(() => {
+      getGenresList()
+    })
+
+    return { goToDetails, movieGenres }
   }
 })
 </script>

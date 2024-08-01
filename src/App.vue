@@ -23,5 +23,11 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+import { getGenresData } from './api/axios'
+
+onMounted(() => {
+  getGenresData()
+})
 </script>
