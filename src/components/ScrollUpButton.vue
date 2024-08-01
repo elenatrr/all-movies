@@ -10,30 +10,30 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
+import { defineComponent, ref, onMounted, onUnmounted } from 'vue'
 
 export default defineComponent({
   name: 'ScrollUpButton',
   setup() {
-    const showButton = ref(false);
+    const showButton = ref(false)
 
     const handleScroll = () => {
-      showButton.value = window.scrollY > window.innerHeight;
-    };
+      showButton.value = window.scrollY > window.innerHeight
+    }
 
     const scrollToTop = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
 
     onMounted(() => {
-      window.addEventListener('scroll', handleScroll);
-    });
+      window.addEventListener('scroll', handleScroll)
+    })
 
     onUnmounted(() => {
-      window.removeEventListener('scroll', handleScroll);
-    });
+      window.removeEventListener('scroll', handleScroll)
+    })
 
-    return { showButton, scrollToTop };
+    return { showButton, scrollToTop }
   }
-});
+})
 </script>

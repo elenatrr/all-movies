@@ -18,7 +18,7 @@
       <MovieTile v-for="movie in movies" :key="movie.id" :movie="movie" />
     </div>
     <p v-if="isLoading" class="text-center mt-4">Loading...</p>
-    <ScrollUpButton/>
+    <ScrollUpButton />
   </div>
 </template>
 
@@ -88,8 +88,8 @@ export default defineComponent({
     })
 
     onUnmounted(() => {
-      window.removeEventListener('scroll', loadMoreMovies);
-    });
+      window.removeEventListener('scroll', loadMoreMovies)
+    })
 
     return { movies, category, setCategory, isLoading, fetchMovies, categories, route }
   }
