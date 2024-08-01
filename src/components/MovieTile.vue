@@ -43,9 +43,9 @@ export default defineComponent({
   setup(props) {
     const router = useRouter()
     const movieGenres = ref<string[]>([])
+    const maxGenresAmount = 3
 
     const getGenresList = () => {
-      const maxGenresAmount = 3
       const genreNames = props.movie.genre_ids
         .map((genreId: number) => getGenreNameById(genreId))
         .filter((genreName: string | null) => genreName !== null)

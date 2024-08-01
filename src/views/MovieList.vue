@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto px-4">
+  <div class="relative container mx-auto px-4">
     <h1 class="text-2xl mb-4 text-center font-bold">What to watch</h1>
     <div class="flex justify-center mb-6 gap-4">
       <button
@@ -18,19 +18,21 @@
       <MovieTile v-for="movie in movies" :key="movie.id" :movie="movie" />
     </div>
     <p v-if="isLoading" class="text-center mt-4">Loading...</p>
+    <ScrollUpButton />
   </div>
 </template>
 
 <script lang="ts">
 import MovieTile from '@/components/MovieTile.vue'
 import { Movie } from '@/common/definitions'
-import { defineComponent, onMounted, ref, watch } from 'vue'
+import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue'
 import { getMoviesData } from '@/api/axios'
 import { useRoute, useRouter } from 'vue-router'
+import ScrollUpButton from '@/components/ScrollUpButton.vue'
 
 export default defineComponent({
   name: 'MovieList',
-  components: { MovieTile },
+  components: { MovieTile, ScrollUpButton },
 
   setup() {
     const route = useRoute()
@@ -83,6 +85,10 @@ export default defineComponent({
     onMounted(() => {
       fetchMovies()
       window.addEventListener('scroll', loadMoreMovies)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('scroll', loadMoreMovies)
     })
 
     return { movies, category, setCategory, isLoading, fetchMovies, categories, route }
