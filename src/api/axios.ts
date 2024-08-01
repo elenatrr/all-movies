@@ -1,9 +1,11 @@
 import axios from 'axios'
+console.log(import.meta.env
+)
 
 const theMovieDbApi = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
   headers: {
-    Authorization: `Bearer ${import.meta.env.VUE_APP_API_KEY}`,
+    Authorization: `Bearer ${import.meta.env.VITE_APP_API_KEY}`,
     Accept: 'application/json'
   }
 })
