@@ -1,6 +1,4 @@
 import axios from 'axios'
-console.log(import.meta.env
-)
 
 const theMovieDbApi = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
