@@ -26,7 +26,7 @@ const getMovieDetailsData = async (id: string) => {
     const response = await theMovieDbApi.get(`/movie/${id}`)
     return response.data
   } catch (error) {
-    console.error(`Error fetching movie detailes: ${error}`)
+    console.error(`Error fetching movie details: ${error}`)
   }
 }
 
