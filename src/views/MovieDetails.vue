@@ -1,5 +1,6 @@
 <template>
-  <div v-if="movieDetails" class="container mx-auto px-4">
+  <div v-if="error" class="text-center text-red-500">{{ error }}</div>
+  <div v-else-if="movieDetails" class="container mx-auto px-4">
     <h1 class="text-3xl font-bold mb-2">{{ movieDetails.original_title }}</h1>
     <div class="flex mt-4 flex-col gap-8 sm:flex-row mb-4">
       <div class="sm:w-1/3">
@@ -58,6 +59,7 @@ export default defineComponent({
     const recommendedMovies = ref<Movie[]>([])
     const route = useRoute()
     const maxRecommendedMoviesAmount = 12
+    const error = ref<string | null>(null)
 
     const formattedVoteCount = computed(() =>
       movieDetails.value ? formatNumber(movieDetails.value.vote_count) : ''
@@ -81,6 +83,8 @@ export default defineComponent({
     )
 
     const fetchMovieDetails = async () => {
+      error.value = null
+
       try {
         const movieId = String(route.params.id)
         const [movieDetailsResponse, recommendedMoviesResponse] = await Promise.all([
@@ -94,8 +98,9 @@ export default defineComponent({
           maxRecommendedMoviesAmount
         )
         window.scrollTo({ top: 0, behavior: 'smooth' })
-      } catch (error) {
-        console.error(`Error fetching movie details: ${error}`)
+      } catch (err) {
+        error.value = 'Failed to fetch movie details. Please try again later.'
+        console.error(`Error fetching movie details: ${err}`)
       }
     }
 
@@ -109,7 +114,8 @@ export default defineComponent({
       formattedRevenue,
       formattedReleaseDate,
       formattedCountries,
-      formattedGenres
+      formattedGenres,
+      error
     }
   }
 })
