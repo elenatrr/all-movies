@@ -6,7 +6,7 @@
   >
     <div class="relative h-80">
       <p class="absolute top-2 right-2 bg-white opacity-90 p-1 rounded-lg min-w-8 text-center">
-        {{ movie.vote_average.toFixed(1) }}
+        {{ formattedVoteAverage }}
       </p>
       <img
         class="w-full h-full object-cover object-bottom shadow-md"
@@ -29,7 +29,7 @@
 
 <script lang="ts">
 import { getGenreNameById } from '@/api/axios'
-import { defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
@@ -44,6 +44,8 @@ export default defineComponent({
     const router = useRouter()
     const movieGenres = ref<string[]>([])
     const maxGenresAmount = 3
+
+    const formattedVoteAverage = computed(() => props.movie.vote_average.toFixed(1))
 
     const getGenresList = () => {
       const genreNames = props.movie.genre_ids
@@ -61,7 +63,7 @@ export default defineComponent({
       getGenresList()
     })
 
-    return { goToDetails, movieGenres }
+    return { goToDetails, movieGenres, formattedVoteAverage }
   }
 })
 </script>

@@ -18,7 +18,6 @@
       <MovieTile v-for="movie in movies" :key="movie.id" :movie="movie" />
     </div>
     <p v-if="isLoading" class="text-center mt-4">Loading...</p>
-    <ScrollUpButton />
   </div>
 </template>
 
@@ -28,11 +27,10 @@ import { Movie } from '@/common/definitions'
 import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue'
 import { getMoviesData } from '@/api/axios'
 import { useRoute, useRouter } from 'vue-router'
-import ScrollUpButton from '@/components/ScrollUpButton.vue'
 
 export default defineComponent({
   name: 'MovieList',
-  components: { MovieTile, ScrollUpButton },
+  components: { MovieTile },
 
   setup() {
     const route = useRoute()
@@ -44,23 +42,16 @@ export default defineComponent({
     const category = ref(route.query.category || 'popular')
     const categories = ['popular', 'top_rated', 'now_playing']
 
-    const setCategory = (selectedCategory: string) => {
-      router.push({ name: 'MovieList', query: { category: selectedCategory } })
-    }
-
-    const fetchMovies = async (page = 1) => {
-      if (isLoading.value || currentPage.value > totalPages.value) {
-        return
-      }
-
+    const fetchMovies = async (selectedCategory: string, page = 1) => {
+      if (isLoading.value || (page > 1 && page > totalPages.value)) return
       isLoading.value = true
 
       try {
-        const moviesData = await getMoviesData(String(category.value), page)
+        const moviesData = await getMoviesData(selectedCategory, page)
         if (page === 1) {
           movies.value = moviesData.results
         } else {
-          movies.value = [...movies.value, ...moviesData.results]
+          movies.value.push(...moviesData.results)
         }
         currentPage.value = page
         totalPages.value = moviesData.total_pages
@@ -71,19 +62,29 @@ export default defineComponent({
       }
     }
 
+    const setCategory = (selectedCategory: string) => {
+      router.push({ name: 'MovieList', query: { category: selectedCategory } })
+    }
+
     const loadMoreMovies = () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-        fetchMovies(currentPage.value + 1)
+        fetchMovies(String(category.value), currentPage.value + 1)
       }
     }
 
-    watch(route, () => {
-      category.value = route.query.category || 'popular'
-      fetchMovies()
-    })
+    watch(
+      () => route.query.category,
+      (newCategory) => {
+        const selectedCategory = newCategory || 'popular'
+        category.value = selectedCategory
+        currentPage.value = 1
+        totalPages.value = 1
+        fetchMovies(String(selectedCategory))
+      },
+      { immediate: true }
+    )
 
     onMounted(() => {
-      fetchMovies()
       window.addEventListener('scroll', loadMoreMovies)
     })
 
@@ -91,7 +92,7 @@ export default defineComponent({
       window.removeEventListener('scroll', loadMoreMovies)
     })
 
-    return { movies, category, setCategory, isLoading, fetchMovies, categories, route }
+    return { movies, category, setCategory, isLoading, categories }
   }
 })
 </script>

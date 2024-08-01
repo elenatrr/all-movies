@@ -9,7 +9,7 @@
       The data for this app is sourced from
       <a href="https://www.themoviedb.org" target="_blank" class="text-blue-500 underline"
         >The Movie Database (TMDb)</a
-      >. We hope you enjoy discovering new movies with our app!
+      >. I hope you enjoy discovering new movies with our app!
     </p>
   </div>
 </template>
