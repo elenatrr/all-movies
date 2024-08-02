@@ -1,3 +1,4 @@
+// All the type definitions are stored here
 export type Movie = {
   adult: boolean
   backdrop_path: string

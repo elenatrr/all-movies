@@ -1,3 +1,4 @@
+<!-- This component is displayed when the movie details are still loading -->
 <template>
   <div class="container mx-auto px-4 animate-pulse">
     <div class="h-8 bg-gray-300 rounded w-3/4 mb-4"></div>

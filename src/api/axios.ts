@@ -1,3 +1,4 @@
+// All the API requests are stored here
 import { Genre } from '@/common/definitions'
 import axios from 'axios'
 import { ref } from 'vue'
@@ -49,6 +50,7 @@ const getGenresData = async () => {
   }
 }
 
+// Loops through fetched genres array and returns a genre name when passed genre id
 export function getGenreNameById(id: number): string | null {
   const genre = genres.value.find((genre) => genre.id === id)
   return genre ? genre.name : null

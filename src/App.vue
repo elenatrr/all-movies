@@ -30,6 +30,7 @@ import { getGenresData } from './api/axios'
 import ScrollUpButton from './components/ScrollUpButton.vue'
 
 onMounted(() => {
+  // Fetch all genres from the API once and store them
   getGenresData()
 })
 </script>

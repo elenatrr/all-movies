@@ -1,3 +1,4 @@
+<!-- This component handles specific errors, e. g. 404, when a non-existent route is entered -->
 <template>
   <div class="font-sans flex flex-col items-center justify-center p-4">
     <h2 class="text-center mb-2">404 Not Found</h2>

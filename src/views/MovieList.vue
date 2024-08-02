@@ -1,3 +1,4 @@
+<!-- This page contains the list of movies that can be filtered by category -->
 <template>
   <div class="relative container mx-auto px-4">
     <h1 class="text-2xl mb-4 text-center font-bold">What to watch</h1>
@@ -22,11 +23,8 @@
       <SkeletonMovieTile v-for="num in 10" :key="'skeleton-' + num" />
     </div>
     <div
-     
       v-else
-     
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
-    
     >
       <MovieTile v-for="movie in movies" :key="movie.id" :movie="movie" />
     </div>
@@ -88,6 +86,7 @@ export default defineComponent({
       }
     }
 
+    // Fetch the list of movies on initial render and each time the category changes
     watch(
       () => route.query.category,
       (newCategory) => {
@@ -104,6 +103,7 @@ export default defineComponent({
       window.addEventListener('scroll', loadMoreMovies)
     })
 
+    // Unsubscribe from event to handle side-effects
     onUnmounted(() => {
       window.removeEventListener('scroll', loadMoreMovies)
     })

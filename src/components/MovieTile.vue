@@ -1,3 +1,4 @@
+<!-- This components displays passed movie information in a format of tile -->
 <template>
   <div
     v-if="movie"

@@ -1,3 +1,4 @@
+<!-- This component is displayed when the movie information in the tile is still loading -->
 <template>
   <div class="max-w-sm rounded-lg overflow-hidden shadow-lg mx-auto animate-pulse w-full">
     <div class="relative h-80 bg-gray-300">

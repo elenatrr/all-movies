@@ -1,3 +1,4 @@
+<!-- This button appears on every page when the user scrolls down -->
 <template>
   <button
     v-if="showButton"
@@ -29,6 +30,7 @@ export default defineComponent({
       window.addEventListener('scroll', handleScroll)
     })
 
+    // Unsubscribe from event to handle side-effects
     onUnmounted(() => {
       window.removeEventListener('scroll', handleScroll)
     })
