@@ -1,39 +1,65 @@
-# all-movies
+# All Movies App
 
-This template should help get you started developing with Vue 3 in Vite.
+All Movies application allows users to browse popular movies and view detailed information about each movie. The data for this app is sourced from The Movie Database.
+
+## Demo
+
+You can see a live demo of the application [here](https://all-movies-rho.vercel.app/).
+
+## Technologies Used
+
+- Vue.js: JavaScript framework for building user interfaces
+- Vite: Front-end tooling
+- TypeScript: Typed superset of JavaScript
+- Tailwind CSS: A CSS framework for rapid UI development
+- Axios: Promise-based HTTP client for making API requests
+- date-fns: JavaScript date utility library
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
 
-## Type Support for `.vue` Imports in TS
+## Installation
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+1. **Clone the repository:**
 
-## Customize configuration
+```
+git clone https://github.com/elenatrr/all-movies.git
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+cd all-movies
+```
 
-## Project Setup
+2. **Install dependencies:**
 
-```sh
+```
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+3. **Start the development server:**
 
-```sh
+```
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+4. **To build the application for production:**
 
-```sh
+```
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+5. **To lint the code, run:**
 
-```sh
+```
 npm run lint
 ```
+
+6. **To format the code with Prettier:**
+
+```
+npm run format
+```
+
+
+## Contributing
+
+Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request. 

@@ -15,7 +15,10 @@
       </button>
     </div>
     <div v-if="error" class="text-center text-red-500">{{ error }}</div>
-    <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+    <div
+      v-else
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+    >
       <MovieTile v-for="movie in movies" :key="movie.id" :movie="movie" />
     </div>
     <p v-if="isLoading" class="text-center mt-4">Loading...</p>
