@@ -22,8 +22,11 @@
       <SkeletonMovieTile v-for="num in 10" :key="'skeleton-' + num" />
     </div>
     <div
+     
       v-else
+     
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+    
     >
       <MovieTile v-for="movie in movies" :key="movie.id" :movie="movie" />
     </div>
