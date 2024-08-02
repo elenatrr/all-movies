@@ -31,7 +31,9 @@
     <p>{{ movieDetails.overview }}</p>
     <div class="mt-4">
       <h2 class="text-2xl font-bold mb-4">Recommendations</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+      >
         <MovieTile
           v-for="recommendedMovie in recommendedMovies"
           :key="recommendedMovie.id"
