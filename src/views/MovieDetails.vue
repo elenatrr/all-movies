@@ -1,3 +1,4 @@
+<!-- This page contains detailed information about the selected movie -->
 <template>
   <div v-if="error" class="text-center text-red-500">{{ error }}</div>
   <SkeletonMovieDetails v-else-if="isLoading" />
@@ -40,9 +41,7 @@
       </div>
       <div
         v-else
-       
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
-      
       >
         <MovieTile
           v-for="recommendedMovie in recommendedMovies"
@@ -122,6 +121,7 @@ export default defineComponent({
       }
     }
 
+    // Fetch movie details on initial render and each time the route changes
     watch(() => route.params.id, fetchMovieDetails, { immediate: true })
 
     return {
