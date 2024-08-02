@@ -15,10 +15,18 @@
       </button>
     </div>
     <div v-if="error" class="text-center text-red-500">{{ error }}</div>
-    <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+    <div
+      v-else-if="isLoading"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+    >
+      <SkeletonMovieTile v-for="num in 10" :key="'skeleton-' + num" />
+    </div>
+    <div
+      v-else
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+    >
       <MovieTile v-for="movie in movies" :key="movie.id" :movie="movie" />
     </div>
-    <p v-if="isLoading" class="text-center mt-4">Loading...</p>
   </div>
 </template>
 
@@ -28,10 +36,11 @@ import { Movie } from '@/common/definitions'
 import { defineComponent, onMounted, onUnmounted, ref, watch } from 'vue'
 import { getMoviesData } from '@/api/axios'
 import { useRoute, useRouter } from 'vue-router'
+import SkeletonMovieTile from '@/components/SkeletonMovieTile.vue'
 
 export default defineComponent({
   name: 'MovieList',
-  components: { MovieTile },
+  components: { MovieTile, SkeletonMovieTile },
 
   setup() {
     const route = useRoute()
