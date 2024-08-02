@@ -1,5 +1,6 @@
 <template>
   <div v-if="error" class="text-center text-red-500">{{ error }}</div>
+  <SkeletonMovieDetails v-else-if="isLoading" />
   <div v-else-if="movieDetails" class="container mx-auto px-4">
     <h1 class="text-3xl font-bold mb-2">{{ movieDetails.original_title }}</h1>
     <div class="flex mt-4 flex-col gap-8 sm:flex-row mb-4">
@@ -32,7 +33,16 @@
     <div class="mt-4">
       <h2 class="text-2xl font-bold mb-4">Recommendations</h2>
       <div
+        v-if="isLoading"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+      >
+        <SkeletonMovieTile v-for="num in 10" :key="'skeleton-' + num" />
+      </div>
+      <div
+        v-else
+       
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6"
+      
       >
         <MovieTile
           v-for="recommendedMovie in recommendedMovies"
@@ -52,16 +62,19 @@ import { getMovieDetailsData, getRecommendedMoviesData } from '@/api/axios'
 import { formatReleaseDate } from '@/utils/formatDate'
 import { formatNumber } from '@/utils/formatNumber'
 import { Movie, MovieDetails } from '@/common/definitions'
+import SkeletonMovieTile from '@/components/SkeletonMovieTile.vue'
+import SkeletonMovieDetails from '@/components/SkeletonMovieDetails.vue'
 
 export default defineComponent({
   name: 'MovieDetails',
-  components: { MovieTile },
+  components: { MovieTile, SkeletonMovieTile, SkeletonMovieDetails },
   setup() {
     const movieDetails = ref<MovieDetails | null>(null)
     const recommendedMovies = ref<Movie[]>([])
     const route = useRoute()
     const maxRecommendedMoviesAmount = 12
     const error = ref<string | null>(null)
+    const isLoading = ref(false)
 
     const formattedVoteCount = computed(() =>
       movieDetails.value ? formatNumber(movieDetails.value.vote_count) : ''
@@ -86,6 +99,7 @@ export default defineComponent({
 
     const fetchMovieDetails = async () => {
       error.value = null
+      isLoading.value = true
 
       try {
         const movieId = String(route.params.id)
@@ -103,6 +117,8 @@ export default defineComponent({
       } catch (err) {
         error.value = 'Failed to fetch movie details. Please try again later.'
         console.error(`Error fetching movie details: ${err}`)
+      } finally {
+        isLoading.value = false
       }
     }
 
@@ -117,7 +133,8 @@ export default defineComponent({
       formattedReleaseDate,
       formattedCountries,
       formattedGenres,
-      error
+      error,
+      isLoading
     }
   }
 })
