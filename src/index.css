@@ -10,3 +10,69 @@
   padding: 1rem;
   font-weight: normal;
 }
+.max-w-xl {
+  max-width: 1200px;
+}
+.movie-details > li{
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-content: stretch;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.movie-details li > span {
+  padding-right: 20px !important;
+  
+  padding: 11px 0;
+  display: inline-block;
+  font-size: 20px;
+}
+.movie-details {
+  max-width: 630px;
+  width: 100%;
+}
+
+.contentbox {
+  padding: 50px;
+  border: 1px solid #ddd;
+  max-width: 60%;
+  width: 100%;
+  align-items: center;
+}
+.contentbox h4 {
+  font-size: 60px;
+  text-transform: uppercase;
+  line-height: 50px;
+  margin-bottom: 30px;
+}
+.contentbox p {
+  font-size: 22px;
+  line-height: 26px;
+  max-width: 90%;
+}
+
+.MovieRates span {
+  font-size: 20px;
+  background-color: #b91c1c;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.MovieRates {
+  padding: 20px 0;
+}
+
+.imagebox {
+  height: 80vh;
+  max-width: 40%;
+  width: 100%;
+}
+
+
+.movieGenres {
+  font-size: 18px;
+  padding: 20px 0;
+  color: #000;
+}

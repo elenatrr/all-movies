@@ -2,28 +2,32 @@
 <template>
   <div
     v-if="movie"
-    class="max-w-sm rounded-lg overflow-hidden shadow-lg cursor-pointer hover:scale-105 transition-transform mx-auto"
+    class="max-w-xl rounded-lg overflow-hidden shadow-lg cursor-pointer transition-transform mx-auto"
     @click="goToDetails"
   >
-    <div class="relative">
-      <p class="absolute top-2 right-2 bg-white opacity-90 p-1 rounded-lg min-w-8 text-center">
-        {{ formattedVoteAverage }}
-      </p>
-      <img
-        class="w-full h-full object-cover object-center shadow-md"
-        :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
-        :alt="movie.original_title"
-      />
-      <div
-        v-if="movieGenres"
-        class="text-xs absolute bottom-0 px-2 rounded-tr-lg bg-white opacity-90"
-      >
-        {{ movieGenres.join(', ') }}
+    <div class="relative flex align-middle ">
+      <div class="imagebox">
+        
+        <img
+          class="w-full h-full object-cover object-center shadow-md"
+          :src="`https://image.tmdb.org/t/p/w500/${movie.poster_path}`"
+          :alt="movie.original_title"
+        />
+        
       </div>
-    </div>
-    <div class="px-3 py-2">
-      <h4 class="font-bold text-lg mb-1">{{ movie.title }}</h4>
-      <p class="text-sm text-gray-700">{{ movie.overview.substring(0, 70) }}...</p>
+      <div class="contentbox px-3 py-2 flex">
+        <div class="content-wrapper">
+          <h4 class="font-bold text-lg mb-1">{{ movie.title }}</h4>
+          <p class="text-sm text-gray-700">{{ movie.overview }}</p>
+          <div class="MovieRates"><span>Ratings {{ formattedVoteAverage }}</span></div>
+          <div 
+          v-if="movieGenres"
+          class="movieGenres text-xs  bottom-0 px-2 rounded-tr-lg bg-white opacity-90"
+        >
+          {{ movieGenres.join(', ') }}
+        </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
